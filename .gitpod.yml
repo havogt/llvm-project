@@ -1,15 +1,16 @@
 tasks:
   - init: |
       mkdir build
-      cmake -DCMAKE_INSTALL_PREFIX=/workspace/cmakels/install \
+      cmake -DCMAKE_INSTALL_PREFIX=/workspace/llvm-project/install \
       -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_BUILD_TYPE:STRING=Debug \
       -H/workspace/llvm-project/llvm -B/workspace/llvm-project/build "-GUnix Makefiles" \
       -DLLVM_TARGETS_TO_BUILD=X86 -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra"
-      ln -s /workspace/cmakels/build/compile_commands.json .
+      ln -s /workspace/llvm-project/build/compile_commands.json .
       # TODO ninja
     prebuild: |
+      cmake --build /workspace/llvm-project/build/ --parallel $(nproc)
       mkdir -p build/.clangd
-      clangd-indexer-10-rc1 --executor=all-TUs compile_commands.json > /workspace/cmakels/build/.clangd/clangd.dex
+      clangd-indexer-10-rc1 --executor=all-TUs compile_commands.json > /workspace/llvm-project/build/.clangd/clangd.dex
 
 image:
   file: .gitpod.Dockerfile
