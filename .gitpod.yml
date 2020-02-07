@@ -7,6 +7,9 @@ tasks:
       -DLLVM_TARGETS_TO_BUILD=X86 -DLLVM_ENABLE_PROJECTS=clang;clang-tools-extra 
       ln -s /workspace/cmakels/build/compile_commands.json .
       # TODO ninja
+    prebuild: |
+      mkdir -p build/.clangd
+      clangd-indexer-10-rc1 --executor=all-TUs compile_commands.json > /workspace/cmakels/build/.clangd/clangd.dex
 
 image:
   file: .gitpod.Dockerfile
