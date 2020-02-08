@@ -6,7 +6,7 @@ COPY --from=havogt/clangd-indexer:v10.0.0-rc1 /build/llvm-project/llvm/build/bin
 COPY --from=havogt/clangd-indexer:v10.0.0-rc1 /build/llvm-project/llvm/build/bin/clangd-indexer /usr/bin/clangd-indexer-10-rc1
 
 RUN apt-get install -yq \
-        ninja \
+        ninja-build \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
 USER gitpod
