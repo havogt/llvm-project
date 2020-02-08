@@ -8,7 +8,7 @@ tasks:
       -DLLVM_PARALLEL_LINK_JOBS=2
       ln -s /workspace/llvm-project/build/compile_commands.json .
     prebuild: |
-      cmake --build /workspace/llvm-project/build/ --parallel $(nproc)
+      cmake --build /workspace/llvm-project/build/ --parallel 8
       mkdir -p build/.clangd
     #   clangd-indexer-10-rc1 --executor=all-TUs compile_commands.json > /workspace/llvm-project/build/.clangd/clangd.dex
 
