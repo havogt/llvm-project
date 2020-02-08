@@ -10,7 +10,7 @@ tasks:
     prebuild: |
       cmake --build /workspace/llvm-project/build/ --parallel $(nproc)
       mkdir -p build/.clangd
-      clangd-indexer-10-rc1 --executor=all-TUs compile_commands.json > /workspace/llvm-project/build/.clangd/clangd.dex
+    #   clangd-indexer-10-rc1 --executor=all-TUs compile_commands.json > /workspace/llvm-project/build/.clangd/clangd.dex
 
 image:
   file: .gitpod.Dockerfile
