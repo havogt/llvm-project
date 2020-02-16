@@ -5,12 +5,12 @@ tasks:
       -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_BUILD_TYPE:STRING=Release \
       -H/workspace/llvm-project/llvm -B/workspace/llvm-project/build -GNinja \
       -DLLVM_TARGETS_TO_BUILD=X86 -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" \
-      -DLLVM_PARALLEL_LINK_JOBS=1 -DLLVM_PARALLEL_COMPILE_JOBS=4 -DLLVM_USE_LINKER=gold \
+      -DLLVM_PARALLEL_LINK_JOBS=1 -DLLVM_PARALLEL_COMPILE_JOBS=2 -DLLVM_USE_LINKER=gold \
       ln -s /workspace/llvm-project/build/compile_commands.json .
     prebuild: |
       cmake --build /workspace/llvm-project/build/
       mkdir -p build/.clangd
-      clangd-indexer-10-rc1 --executor=all-TUs compile_commands.json > /workspace/llvm-project/build/.clangd/clangd.dex
+      # clangd-indexer-10-rc1 --executor=all-TUs compile_commands.json > /workspace/llvm-project/build/.clangd/clangd.dex
 
 image:
   file: .gitpod.Dockerfile
