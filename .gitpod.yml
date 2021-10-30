@@ -1,5 +1,7 @@
 tasks:
   - init: |
+      export CXX=`which clang++`
+      export CC=`which clang`
       mkdir build
       cmake -DCMAKE_INSTALL_PREFIX=/workspace/llvm-project/install \
       -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_BUILD_TYPE:STRING=Release \
